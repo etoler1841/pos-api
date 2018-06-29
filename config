@@ -1,0 +1,5 @@
+Host pbgames
+HostName pricebustersgames.com
+User pbgames
+IdentityFile pbgames
+Port 22
