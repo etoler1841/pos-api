@@ -2,13 +2,8 @@
   require 'includes/includes.php';
   $data = $_GET;
   $cat = new Category($conn);
-  if(isset($data['id'])){
-    $results = $cat->getCategoryById($data['id']);
-  } elseif(isset($data['tree'])){
-    $results = $cat->getCategoryTree($data['tree']);
-  } else {
-    $results = $cat->getAllCategories();
-  }
+  $id = (isset($data['id'])) ? $data['id'] : 0;
+  $results = $cat->getCategoryTree($id);
   if($results){
     $return['status'] = 'ok';
     $return['results'] = $results;

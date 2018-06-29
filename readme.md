@@ -11,8 +11,6 @@ Only one parameter will be accepted. If multiple parameters are defined, only th
 #### Parameters
 ><p>**id** *(integer)*<br />
 Category ID of the requested category</p>
-<p>**tree** *(integer)*<br />
-Returns tree view, listing all categories descended from the given category ID (exclusive) in a cascading layout</p>
 
 #### Response
 ```
@@ -22,6 +20,13 @@ Returns tree view, listing all categories descended from the given category ID (
   "result": [{
     "categories_id": 0,
     "categories_name": "string"
+    "children": [
+      {
+        "categories_id": 1,
+        "categories_name": "string",
+        "children": []
+      }
+    ]
   }, {
     "categories_id": 1,
     "categories_name": "string"
