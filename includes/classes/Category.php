@@ -4,7 +4,7 @@
       $this->db = $db;
     }
 
-    function getCategoryTree($id){
+    function getCategoryTree($id, $returnArray = true){
       $db = $this->db;
 
       $sql = "SELECT cd.categories_id, cd.categories_name
@@ -14,10 +14,9 @@
       $sql .= " ORDER BY cd.categories_id ASC";
       $result = $db->query($sql);
       $sql2 = "SELECT categories_id
-              FROM categories
-              WHERE parent_id = ?";
+               FROM categories
+               WHERE parent_id = ?";
       $stmt = $db->prepare($sql2);
-      $return = array();
       if($result->num_rows){
         while($row = $result->fetch_array(MYSQLI_ASSOC)){
           $output = array(
@@ -31,10 +30,14 @@
           $stmt->store_result();
           while($row2 = $stmt->fetch()){
             $subCat = new Category($this->db);
-            $children[] = $subCat->getCategoryTree($parent);
+            $children[] = $subCat->getCategoryTree($parent, false);
           }
           $output['children'] = $children;
-          $return[] = $output;
+          if($returnArray){
+            $return[] = $output;
+          } else {
+            $return = $output;
+          }
         }
       }
       return $return;

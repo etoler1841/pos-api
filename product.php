@@ -6,15 +6,21 @@
     'errors' => array(),
     'results' => array()
   );
-  $cat = new Category($conn);
-  $id = (isset($data['id'])) ? $data['id'] : 0;
-  $results = $cat->getCategoryTree($id);
+  if(!isset($data['id'])){
+    $return['status'] = 'err';
+    $return['errors'][] = 'Missing product ID';
+    echo json_encode($return);
+    exit();
+  }
+  $prod = new Product($conn);
+  $id = $data['id'];
+  $results = $prod->getProduct($id);
   if($results){
     $return['status'] = 'ok';
     $return['results'] = $results;
   } else {
     $return['status'] = 'err';
-    $return['errors'][] = 'Categories not found.';
+    $return['errors'][] = 'Products not found.';
   }
 
   echo json_encode($return);

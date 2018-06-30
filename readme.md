@@ -6,8 +6,6 @@ This API is used to facilitate communication between the [Price Busters Games we
 ## Categories
 > URL: http://www.pricebustersgames.com/pbadmin/pos-api/category
 
-Only one parameter will be accepted. If multiple parameters are defined, only the first will be processed. If no parameters are set, all categories will be returned.
-
 #### Parameters
 ><p>**id** *(integer)*<br />
 Category ID of the requested category</p>
@@ -17,19 +15,45 @@ Category ID of the requested category</p>
 {
   "status": "ok" || "err",
   "errors": [],
-  "result": [{
-    "categories_id": 0,
-    "categories_name": "string"
-    "children": [
-      {
-        "categories_id": 1,
-        "categories_name": "string",
-        "children": []
-      }
-    ]
-  }, {
-    "categories_id": 1,
-    "categories_name": "string"
-  }, (...)]
+  "results": [
+    {
+      "categories_id": 0,
+      "categories_name": "string"
+      "children": [
+        {
+          "categories_id": 1,
+          "categories_name": "string",
+          "children": []
+        }
+      ]
+    },
+    {
+      "categories_id": 1,
+      "categories_name": "string",
+      "children": []
+    }, (...)
+  ]
+}
+```
+
+## Products
+> URL: http://www.pricebustersgames.com/pbadmin/pos-api/Products
+
+#### Parameters
+><p>**id** *(integer)*<br />
+Product ID of the requested product</p>
+
+#### Response
+```
+{
+  "status": "ok" || "err",
+  "errors": [],
+  "results": [
+    {
+      "products_id": 0,
+      "products_name": "string",
+      "categories_id": 0
+    }
+  ]
 }
 ```
