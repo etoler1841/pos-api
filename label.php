@@ -6,19 +6,21 @@
     'errors' => array(),
     'results' => array()
   );
-  $cat = new Category($conn);
-  $id = (isset($data['id'])) ? $data['id'] : 0;
-  if(isset($data['tree']) && $data['tree'] == 0){
-    $results = $cat->getCategory($id);
-  } else {
-    $results = $cat->getCategoryTree($id);
+  if(!isset($data['id'])){
+    $return['status'] = 'err';
+    $return['errors'][] = 'Missing category ID';
+    echo json_encode($return);
+    exit();
   }
+  $prod = new Category($conn);
+  $id = $data['id'];
+  $results = $prod->getLabels($id);
   if($results){
     $return['status'] = 'ok';
     $return['results'] = $results;
   } else {
     $return['status'] = 'err';
-    $return['errors'][] = 'Categories not found.';
+    $return['errors'][] = 'Products not found.';
   }
 
   echo json_encode($return);
