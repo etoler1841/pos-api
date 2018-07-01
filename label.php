@@ -20,7 +20,7 @@
     $return['results'] = $results;
   } else {
     $return['status'] = 'err';
-    $return['errors'][] = 'Products not found.';
+    $return['errors'][] = 'Category not found.';
   }
 
   echo json_encode($return);
