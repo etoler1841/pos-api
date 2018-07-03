@@ -68,10 +68,22 @@
       $db = $this->db;
 
       $sql = "SELECT * FROM pos_labels WHERE categories_id = $id";
-      $row = $db->query($sql)->fetch_array(MYSQLI_ASSOC);
-      foreach($row as $a => $b){
-        $return[$a] = (int)$b;
+      $result = $db->query($sql);
+      if($result->num_rows){
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+        foreach($row as $a => $b){
+          $return[$a] = (int)$b;
+        }
+      } else {
+        $return = array(
+          'categories_id' => (int)$id,
+          'standard' => 0,
+          'barcode' => 0,
+          'game_sleeve' => 0,
+          'game_case' => 0
+        );
       }
+
       return $return;
     }
   }
