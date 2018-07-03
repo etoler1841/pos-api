@@ -1,3 +1,3 @@
 RewriteEngine On
-RewriteRule ^pos-api/(.*?)/([0-9]+)$ $1.php?id=$2 [NC,QSA,L]
-RewriteRule ^pos-api/(.*?)/?$ $1.php [NC,L]
+RewriteRule ^pos-api/(.*?)/([0-9]+)$ pos-api/$1.php?id=$2 [NC,QSA,L]
+RewriteRule ^pos-api/(.*?)/?$ pos-api/$1.php [NC,L]
