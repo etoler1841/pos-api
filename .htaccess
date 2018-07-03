@@ -1,4 +1,4 @@
 RewriteEngine On
-RewriteRule ^category/([0-9]+)$ category.php?id=$1 [NC,QSA,L]
-RewriteRule ^product/([0-9]+)$ product.php?id=$1 [NC,QSA,L]
-RewriteRule ^label/([0-9]+)$ label.php?id=$1 [NC,QSA,L]
+
+RewriteRule ^pos-api/(.*?)/([0-9]+)$ $1.php?id=$2 [NC,QSA,L]
+RewriteRule ^pos-api/(.*?)/?$ $1.php [NC,L]
