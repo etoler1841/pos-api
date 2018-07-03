@@ -1,3 +1,10 @@
 RewriteEngine On
-RewriteRule ^pos-api/(.*?)/([0-9]+)$ pos-api/$1.php?id=$2 [NC,QSA,L]
-RewriteRule ^pos-api/(.*?)/?$ pos-api/$1.php [NC,L]
+
+RewriteRule ^category/([0-9]+)$ category.php?id=$1 [NC,QSA,L]
+RewriteRule ^category/?$ category.php [NC,L]
+
+RewriteRule ^product/([0-9]+)$ product.php?id=$1 [NC,QSA,L]
+RewriteRule ^product/?$ product.php [NC,L]
+
+RewriteRule ^label/([0-9]+)$ label.php?id=$1 [NC,QSA,L]
+RewriteRule ^label/?$ label.php [NC,L]
