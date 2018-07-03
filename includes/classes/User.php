@@ -13,7 +13,7 @@
       $stmt = $db->prepare($sql);
       $stmt->bind_param($token);
       $stmt->execute();
-      return (stmt->num_rows) ? true : false;
+      return ($stmt->num_rows) ? true : false;
     }
   }
 ?>
