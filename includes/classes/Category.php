@@ -75,7 +75,8 @@
           $return[$a] = (int)$b;
         }
       } else {
-        $return[$id] = array(
+        $return = array(
+          'categories_id' => (int)$id,
           'standard' => 0,
           'barcode' => 0,
           'game_sleeve' => 0,
