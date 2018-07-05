@@ -9,7 +9,7 @@
   );
   if(isset($data['authToken']) && isset($data['authId'])){
     $user = new User($db);
-    if($user->authorize($data['authId'], $data['authToken'])){
+    if($user->authorize($auth['authId'], $auth['authToken'])){
       if(isset($data['id'])){
         $prod = new Product($conn);
         $id = $data['id'];
