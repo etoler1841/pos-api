@@ -2,8 +2,8 @@
 ## Introduction
 This API is used to facilitate communication between the [Price Busters Games website](http://www.pricebustersgames.com) and the **PHP Desktop POS** application.
 ## Connecting to the API
-All GET requests may be made without authorization. All POST requests must include the store's unique security token in the 'token' parameter.
-## Categories (GET)
+All requests must be made via POST and must include the store's ID in the 'authId' parameter and unique security token in the 'authToken' parameter.
+## Categories (POST)
 > URL: http://www.pricebustersgames.com/pbadmin/pos-api/category/{id}
 
 #### Parameters
@@ -55,7 +55,7 @@ Toggles tree view
 }
 ```
 
-## Products (GET)
+## Products (POST)
 > URL: http://www.pricebustersgames.com/pbadmin/pos-api/product/{id}
 
 #### Parameters
@@ -80,7 +80,7 @@ Product ID of the requested product</p>
 }
 ```
 
-## Labels (GET)
+## Labels (POST)
 > URL: http://www.pricebustersgames.com/pbadmin/pos-api/label/{id}
 
 #### Parameters
@@ -104,4 +104,4 @@ Category ID of the requested product</p>
 }
 ```
 
-## 
+##
