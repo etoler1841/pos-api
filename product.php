@@ -1,6 +1,6 @@
 <?php
   require 'includes/includes.php';
-  $auth = json_decode(file_get_contents("php://input"), true);
+  $auth = $_POST;
   $data = $_GET;
   $return = array(
     'status' => '',
