@@ -9,7 +9,7 @@
   );
   if(isset($auth['authToken']) && isset($auth['authId'])){
     $user = new User($db);
-    if($user->authorize($data['authId'], $data['authToken'])){
+    if($user->authorize($auth['authId'], $auth['authToken'])){
       if(isset($data['id'])){
         $prod = new Category($conn);
         $id = $data['id'];
