@@ -4,14 +4,15 @@
       $this->db = $db;
     }
 
-    function authorize($token){
+    function authorize($id, $token){
       $db = $this->db;
 
       $sql = "SELECT store_id
               FROM pos_auth
-              WHERE token = ?";
+              WHERE id = ?
+              AND token = ?";
       $stmt = $db->prepare($sql);
-      $stmt->bind_param($token);
+      $stmt->bind_param("ss", $id, $token);
       $stmt->execute();
       return ($stmt->num_rows) ? true : false;
     }
