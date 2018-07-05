@@ -1,12 +1,13 @@
 <?php
   require 'includes/includes.php';
-  $data = json_decode(file_get_contents("php://input"), true);
+  $auth = json_decode(file_get_contents("php://input"), true);
+  $data = $_GET;
   $return = array(
     'status' => '',
     'errors' => array(),
     'results' => array()
   );
-  if(isset($data['token'])){
+  if(isset($auth['authToken']) && isset($auth['authId'])){
     $user = new User($db);
     if($user->authorize($data['authId'], $data['authToken'])){
       if(isset($data['id'])){
@@ -30,7 +31,7 @@
     }
   } else {
     $return['status'] = 'err';
-    $return['errors'][] = 'Missing authorization token';
+    $return['errors'][] = 'Missing authorization params';
   }
 
   echo json_encode($return);
