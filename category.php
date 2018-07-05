@@ -6,7 +6,7 @@
     'errors' => array(),
     'results' => array()
   );
-  if(isset($data['token'])){
+  if(isset($data['authToken']) && isset($data['authId'])){
     $user = new User($db);
     if($user->authorize($data['authId'], $data['authToken'])){
       $cat = new Category($conn);
@@ -29,7 +29,7 @@
     }
   } else {
     $return['status'] = 'err';
-    $return['errors'][] = 'Missing authorization token';
+    $return['errors'][] = 'Missing authorization params';
   }
 
   echo json_encode($return);
