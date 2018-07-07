@@ -4,19 +4,39 @@
       $this->db = $db;
     }
 
-    function authorize($id, $token){
+    function authorize(){
       $db = $this->db;
+
+      $headers = apache_request_headers();
+      if(!isset($headers['Authorization'])){
+        $return['status'] = 'err';
+        $return['errors'][] = 'Authorization missing';
+        return $return;
+      }
+      $auth = $headers['Authorization'];
+      if(!preg_match('/bearer .+/i', $auth)){
+        $return['status'] = 'err';
+        $return['errors'][] = 'bearer token missing';
+        return $return;
+      }
+      $token = str_replace("bearer ", "", $auth);
 
       $sql = "SELECT 1
               FROM pos_auth
-              WHERE id = ?
-              AND token = ?";
+              WHERE token = ?";
       $stmt = $db->prepare($sql);
-      $stmt->bind_param("is", $id, $token);
+      $stmt->bind_param("s", $token);
       $stmt->execute();
       $stmt->store_result();
-      echo $stmt->num_rows;
-      return ($stmt->num_rows) ? true : false;
+      if(!$stmt->num_rows){
+        $return['status'] = 'err';
+        $return['errors'][] = 'Authorization rejected';
+        return $return;
+      } else {
+        $return['status'] = 'ok';
+        $return['errors'] = array();
+        return $return;
+      }
     }
   }
 ?>
