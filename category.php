@@ -10,7 +10,7 @@
   if(isset($auth['authToken']) && isset($auth['authId'])){
     $user = new User($db);
     if($user->authorize($auth['authId'], $auth['authToken'])){
-      $cat = new Category($conn);
+      $cat = new Category($db);
       $id = (isset($data['id'])) ? $data['id'] : 0;
       if(isset($data['tree']) && $data['tree'] == 0){
         $results = $cat->getCategory($id);

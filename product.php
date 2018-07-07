@@ -11,7 +11,7 @@
     $user = new User($db);
     if($user->authorize($auth['authId'], $auth['authToken'])){
       if(isset($data['id'])){
-        $prod = new Product($conn);
+        $prod = new Product($db);
         $id = $data['id'];
         $results = $prod->getProduct($id);
         if($results){

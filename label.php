@@ -11,7 +11,7 @@
     $user = new User($db);
     if($user->authorize($auth['authId'], $auth['authToken'])){
       if(isset($data['id'])){
-        $prod = new Category($conn);
+        $prod = new Category($db);
         $id = $data['id'];
         $results = $prod->getLabels($id);
         if($results){
