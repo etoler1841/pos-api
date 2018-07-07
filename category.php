@@ -1,5 +1,6 @@
 <?php
   require 'includes/includes.php';
+  
   $user = new User($db);
   $return = $user->authorize();
   $return['results'] = array();
