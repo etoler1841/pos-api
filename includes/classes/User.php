@@ -7,13 +7,13 @@
     function authorize(){
       $db = $this->db;
 
-      $headers = apache_request_headers();
-      if(!isset($headers['Authorization'])){
+      $headers = $_SERVER;
+      if(!isset($headers['HTTP_AUTHORIZATION'])){
         $return['status'] = 'err';
         $return['errors'][] = 'Authorization missing';
         return $return;
       }
-      $auth = $headers['Authorization'];
+      $auth = $headers['HTTP_AUTHORIZATION'];
       if(!preg_match('/bearer .+/i', $auth)){
         $return['status'] = 'err';
         $return['errors'][] = 'bearer token missing';
