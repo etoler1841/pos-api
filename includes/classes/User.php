@@ -16,10 +16,10 @@
       $auth = $headers['HTTP_AUTHORIZATION'];
       if(!preg_match('/bearer .+/i', $auth)){
         $return['status'] = 'err';
-        $return['errors'][] = 'bearer token missing';
+        $return['errors'][] = 'Bearer token missing';
         return $return;
       }
-      $token = str_replace("bearer ", "", $auth);
+      $token = preg_replace('/bearer /i', '', $auth);
 
       $sql = "SELECT 1
               FROM pos_auth
