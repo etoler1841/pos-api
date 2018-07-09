@@ -1,37 +1,37 @@
 <?php
   require 'includes/includes.php';
-  $auth = $_POST;
-  $data = $_GET;
-  $return = array(
-    'status' => '',
-    'errors' => array(),
-    'results' => array()
-  );
-  if(isset($auth['authToken']) && isset($auth['authId'])){
-    $user = new User($db);
-    if($user->authorize($auth['authId'], $auth['authToken'])){
-      if(isset($data['id'])){
-        $prod = new Product($db);
-        $id = $data['id'];
-        $results = $prod->getProduct($id);
-        if($results){
-          $return['status'] = 'ok';
-          $return['results'] = $results;
-        } else {
-          $return['status'] = 'err';
-          $return['errors'][] = 'Products not found.';
-        }
+
+  $user = new User($db);
+  $return = $user->authorize();
+  $return['results'] = array();
+  if($return['status'] == 'ok'){
+    $data = $_GET;
+    if(isset($data['id'])){
+      $prod = new Product($db);
+      $id = $data['id'];
+      $results = $prod->getProduct($id);
+      if($results){
+        $return['status'] = 'ok';
+        $return['results'] = $results;
       } else {
         $return['status'] = 'err';
-        $return['errors'][] = 'Missing product ID';
+        $return['errors'][] = 'Products not found.';
+      }
+    } elseif(isset($data['catId'])){
+      $prod = new Product($db);
+      $catId = $data['catId'];
+      $results = $prod->getCategoryProducts($catId);
+      if($results){
+        $return['status'] = 'ok';
+        $return['results'] = $results;
+      } else {
+        $return['status'] = 'err';
+        $return['errors'][] = 'Products not found.';
       }
     } else {
       $return['status'] = 'err';
-      $return['errors'][] = 'Authorization token rejected';
+      $return['errors'][] = 'Missing product ID';
     }
-  } else {
-    $return['status'] = 'err';
-    $return['errors'][] = 'Missing authorization params';
   }
 
   echo json_encode($return);

@@ -79,12 +79,13 @@ Product ID of the requested product</p>
       "products_name": "string",
       "products_quantity": 0,
       "products_model": "string",
-      "products_price": 0.00,
+      "products_price": "0.00",
       "categories_id": 0
     }
   ]
 }
 ```
+**NOTE:** The products_price parameter will return a string due to an issue with PHP's serialization. The value will need to be converted to a float if being implemented directly into calculations.
 
 ## Labels (GET)
 > URL: http://www.pricebustersgames.com/pbadmin/pos-api/label/{id}

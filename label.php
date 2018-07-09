@@ -1,37 +1,26 @@
 <?php
   require 'includes/includes.php';
-  $auth = $_POST;
-  $data = $_GET;
-  $return = array(
-    'status' => '',
-    'errors' => array(),
-    'results' => array()
-  );
-  if(isset($auth['authToken']) && isset($auth['authId'])){
-    $user = new User($db);
-    if($user->authorize($auth['authId'], $auth['authToken'])){
-      if(isset($data['id'])){
-        $prod = new Category($db);
-        $id = $data['id'];
-        $results = $prod->getLabels($id);
-        if($results){
-          $return['status'] = 'ok';
-          $return['results'] = $results;
-        } else {
-          $return['status'] = 'err';
-          $return['errors'][] = 'Category not found.';
-        }
+
+  $user = new User($db);
+  $return = $user->authorize();
+  $return['results'] = array();
+  if($return['status'] == 'ok'){
+    $data = $_GET;
+    if(isset($data['id'])){
+      $cat = new Category($db);
+      $id = $data['id'];
+      $results = $prod->getLabels($id);
+      if($results){
+        $return['status'] = 'ok';
+        $return['results'] = $results;
       } else {
         $return['status'] = 'err';
-        $return['errors'][] = 'Missing category ID';
+        $return['errors'][] = 'Category not found.';
       }
     } else {
       $return['status'] = 'err';
-      $return['errors'][] = 'Authorization token rejected';
+      $return['errors'][] = 'Missing category ID';
     }
-  } else {
-    $return['status'] = 'err';
-    $return['errors'][] = 'Missing authorization params';
   }
 
   echo json_encode($return);

@@ -1,6 +1,6 @@
 <?php
   require 'includes/includes.php';
-  
+
   $user = new User($db);
   $return = $user->authorize();
   $return['results'] = array();
@@ -18,10 +18,9 @@
       $return['results'] = $results;
     } else {
       $return['status'] = 'err';
-      $return['errors'][] = 'Categories not found.';
+      $return['errors'][] = 'Category not found.';
     }
   }
-
 
   echo json_encode($return);
 ?>
