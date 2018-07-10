@@ -3,9 +3,9 @@
 This API is used to facilitate communication between the [Price Busters Games website](http://www.pricebustersgames.com) and the **PHP Desktop POS** application.
 ## Connecting to the API
 All API calls must include the following HTTP header:
->Authorization: bearer $token
+>Authorization: bearer {token}
 
-Where $token is the unique security token assigned to each store.
+Where {token} is the unique security token assigned to each store.
 ## Categories (GET)
 >**URI:** http://www.pricebustersgames.com/pbadmin/pos-api/category/{id}
 
@@ -43,7 +43,7 @@ Toggles tree view
   ]
 }
 ```
-###### Single Category View:
+###### Non-Tree View:
 ```
 {
   "status": "ok" || "err",
@@ -53,7 +53,7 @@ Toggles tree view
       "categories_id": 0,
       "categories_name": "string"
       "parent_id": 0
-    }
+    }, (...)
   ]
 }
 ```
