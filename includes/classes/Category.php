@@ -4,6 +4,28 @@
       $this->db = $db;
     }
 
+    function getCategory($id){
+      $db = $this->db;
+
+      $sql = "SELECT cd.categories_id, cd.categories_name, c.parent_id
+              FROM categories_description cd
+              LEFT JOIN categories c ON cd.categories_id = c.categories_id
+              WHERE cd.categories_id = $id";
+      $result = $db->query($sql);
+      $return = array();
+      if($result->num_rows){
+        while($row = $result->fetch_array(MYSQLI_ASSOC)){
+          $output = array(
+            'categories_id' => (int)$row['categories_id'],
+            'categories_name' => $row['categories_name'],
+            'parent_id' => (int)$row['parent_id']
+          );
+          $return[] = $output;
+        }
+      }
+      return $return;
+    }
+
     function getCategoryTree($id, $returnArray = true){
       $db = $this->db;
 
@@ -17,6 +39,7 @@
                FROM categories
                WHERE parent_id = ?";
       $stmt = $db->prepare($sql2);
+      $return = array();
       if($result->num_rows){
         while($row = $result->fetch_array(MYSQLI_ASSOC)){
           $output = array(
@@ -43,14 +66,17 @@
       return $return;
     }
 
-    function getCategory($id){
+    function getCategoriesByParent($parent, $params){
       $db = $this->db;
 
       $sql = "SELECT cd.categories_id, cd.categories_name, c.parent_id
               FROM categories_description cd
               LEFT JOIN categories c ON cd.categories_id = c.categories_id
-              WHERE cd.categories_id = $id";
+              WHERE c.parent_id = $parent
+              ORDER BY c.categories_id ASC
+              LIMIT ".$params['offset'].", ".$params['limit'];
       $result = $db->query($sql);
+      $return = array();
       if($result->num_rows){
         while($row = $result->fetch_array(MYSQLI_ASSOC)){
           $output = array(

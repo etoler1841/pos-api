@@ -10,24 +10,16 @@
       $prod = new Product($db);
       $id = $data['id'];
       $results = $prod->getProduct($id);
-      if($results){
-        $return['status'] = 'ok';
-        $return['results'] = $results;
-      } else {
-        $return['status'] = 'err';
-        $return['errors'][] = 'Products not found.';
-      }
+      $return['results'] = $results;
     } elseif(isset($data['catId'])){
       $prod = new Product($db);
       $catId = $data['catId'];
-      $results = $prod->getCategoryProducts($catId);
-      if($results){
-        $return['status'] = 'ok';
-        $return['results'] = $results;
-      } else {
-        $return['status'] = 'err';
-        $return['errors'][] = 'Products not found.';
-      }
+      $params = array(
+        'limit' => (isset($data['limit']) && $data['limit'] >= 1) ? (int)$data['limit'] : 100,
+        'offset' => (isset($data['offset']) && $data['offset'] >= 0) ? (int)$data['offset'] : 0
+      );
+      if($params['limit'] > 100) $params['limit'] = 100;
+      $return['results'] = $prod->getCategoryProducts($catId, $params);
     } else {
       $return['status'] = 'err';
       $return['errors'][] = 'Missing product ID';

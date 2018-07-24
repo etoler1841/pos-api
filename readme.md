@@ -7,18 +7,35 @@ All API calls must include the following HTTP header:
 
 Where {token} is the unique security token assigned to each store.
 ## Categories (GET)
+To view details of a specific category:
 >**URI:** http://www.pricebustersgames.com/pbadmin/pos-api/category/{id}
 
 #### Parameters
 ><p>**id** *(integer)*<br />
 Category ID of the requested category</p>
 
-#### Optional Parameters (URL encoded)
-><p>**tree** *(1 or 0; default: 1)*<br />
-Toggles tree view
-
 #### Response
-###### Tree View:
+```
+{
+  "status": "ok" || "err",
+  "errors": [],
+  "results": [
+    {
+      "categories_id": 0,
+      "categories_name": "string",
+      "parent_id": 0
+    }
+  ]
+}
+```
+To generate a tree listing a given category and all of its children:
+>**URI:** http://www.pricebustersgames.com/pbadmin/pos-api/category/tree/{id}
+
+#### Parameters
+><p>**id** *(integer)*<br />
+Category ID of the top-level category in the requested tree</p>
+
+#### Response:
 ```
 {
   "status": "ok" || "err",
@@ -43,7 +60,18 @@ Toggles tree view
   ]
 }
 ```
-###### Non-Tree View:
+To view all direct children of a given category:
+>**URI:** http://www.pricebustersgames.com/pbadmin/pos-api/category/parent/{id}
+
+#### Parameters
+><p>**id** *(integer; default: 0)*<br />
+Category ID of the parent category</p>
+<p>**limit:** *(integer; default: 100)*<br />
+Number of results to return; acceptable range: 1-100</p>
+<p>**offset:** *(integer; default: 0)*<br />
+Number of results to skip before beginning the return; must not be negative</p>
+
+#### Response
 ```
 {
   "status": "ok" || "err",
@@ -51,7 +79,7 @@ Toggles tree view
   "results": [
     {
       "categories_id": 0,
-      "categories_name": "string"
+      "categories_name": "string",
       "parent_id": 0
     }, (...)
   ]
@@ -64,6 +92,10 @@ Toggles tree view
 #### Parameters
 ><p>**id** *(integer)*<br />
 Product ID of the requested product</p>
+<p>**limit:** *(integer; default: 100)*<br />
+Number of results to return; acceptable range: 1-100</p>
+<p>**offset:** *(integer; default: 0)*<br />
+Number of results to skip before beginning the return; must not be negative</p>
 
 #### Response
 ```

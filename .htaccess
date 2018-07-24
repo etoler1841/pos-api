@@ -5,6 +5,8 @@ RewriteCond %{HTTP:Authorization} ^(.*)
 RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
 
 RewriteRule ^category/([0-9]+)$ category.php?id=$1 [NC,QSA,L]
+RewriteRule ^category/tree/([0-9]+)$ category.php?id=$1&tree=1 [NC,QSA,L]
+RewriteRule ^category/parent/([0-9]+)$ category.php?parentId=$1 [NC,QSA,L]
 RewriteRule ^category/?$ category.php [NC,L]
 
 RewriteRule ^product/([0-9]+)$ product.php?id=$1 [NC,QSA,L]

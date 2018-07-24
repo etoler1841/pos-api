@@ -1,5 +1,6 @@
 <?php
   require 'includes/includes.php';
+  print_r($_GET);
 
   $user = new User($db);
   $return = $user->authorize();
@@ -7,19 +8,27 @@
   if($return['status'] == 'ok'){
     $data = $_GET;
     $cat = new Category($db);
-    $id = (isset($data['id'])) ? $data['id'] : 0;
-    if(isset($data['tree']) && $data['tree'] == 0){
-      $results = $cat->getCategory($id);
-    } else {
-      $results = $cat->getCategoryTree($id);
-    }
-    if($results){
-      $return['status'] = 'ok';
-      $return['results'] = $results;
+    if(isset($data['id'])){
+      $id = $data['id'];
+      if(isset($data['tree']) && $data['tree'] == 1){
+        $results = $cat->getCategoryTree($id);
+      } else {
+        $results = $cat->getCategory($id);
+      }
+    } elseif(isset($data['parentId'])){
+      $parent = $data['parentId'];
+      $params = array(
+        'limit' => (isset($data['limit']) && $data['limit'] >= 1) ? (int)$data['limit'] : 100,
+        'offset' => (isset($data['offset']) && $data['offset'] >= 0) ? (int)$data['offset'] : 0
+      );
+      if($params['limit'] > 100) $params['limit'] = 100;
+      $results = $cat->getCategoriesByParent($parent, $params);
     } else {
       $return['status'] = 'err';
-      $return['errors'][] = 'Category not found.';
+      $return['errors'][] = 'Missing parameter.';
+      exit(json_encode($return));
     }
+    $return['results'] = $results;
   }
 
   echo json_encode($return);
