@@ -70,6 +70,10 @@ Category ID of the parent category</p>
 Number of results to return; acceptable range: 1-100</p>
 <p>**offset:** *(integer; default: 0)*<br />
 Number of results to skip before beginning the return; must not be negative</p>
+<p>**before:** *(timestamp; default: now)*<br />
+Pulls only categories created before the given time.</p>
+<p>**after:** *(timestamp; default: 0)*<br />
+Pulls only categories created after the given time.</p>
 
 #### Response
 ```
@@ -122,6 +126,10 @@ Category ID of the requested category</p>
 Number of results to return; acceptable range: 1-100</p>
 <p>**offset:** *(integer; default: 0)*<br />
 Number of results to skip before beginning the return; must not be negative</p>
+<p>**before:** *(timestamp; default: now)*<br />
+Pulls only products created before the given time.</p>
+<p>**after:** *(timestamp; default: 0)*<br />
+Pulls only products created after the given time.</p>
 
 #### Response
 ```

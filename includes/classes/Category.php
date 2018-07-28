@@ -73,6 +73,8 @@
               FROM categories_description cd
               LEFT JOIN categories c ON cd.categories_id = c.categories_id
               WHERE c.parent_id = $parent
+              AND c.date_added <= '".$params['before']."'
+              AND c.date_added >= '".$params['after']."'
               ORDER BY c.categories_id ASC
               LIMIT ".$params['offset'].", ".$params['limit'];
       $result = $db->query($sql);

@@ -36,6 +36,8 @@
               FROM products p
               LEFT JOIN products_description pd ON p.products_id = pd.products_id
               WHERE p.master_categories_id = $catId
+              AND p.products_date_added <= '".$params['before']."'
+              AND p.products_date_added >= '".$params['after']."'
               ORDER BY p.products_id ASC
               LIMIT ".$params['offset'].", ".$params['limit'];
       $res = $db->query($sql);
