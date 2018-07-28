@@ -15,6 +15,14 @@
       } else {
         $results = $cat->getCategory($id);
       }
+    } elseif(isset($data['getAll'])){
+      $params = array(
+        'limit' => (isset($data['limit']) && $data['limit'] >= 1) ? (int)$data['limit'] : 100,
+        'offset' => (isset($data['offset']) && $data['offset'] >= 0) ? (int)$data['offset'] : 0,
+        'before' => (isset($data['before'])) ? date('Y-m-d H:i:s', $data['before']) : date('Y-m-d H:i:s', strtotime('now')),
+        'after' => (isset($data['after'])) ? date('Y-m-d H:i:s', $data['after']) : date('Y-m-d H:i:s', 0),
+      );
+      $results = $cat->getAllCategories($params);
     } elseif(isset($data['parentId'])){
       $parent = $data['parentId'];
       $params = array(
