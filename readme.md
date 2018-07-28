@@ -87,15 +87,12 @@ Number of results to skip before beginning the return; must not be negative</p>
 ```
 
 ## Products (GET)
+To view details of a specific product:
 >**URI:** http://www.pricebustersgames.com/pbadmin/pos-api/product/{id}
 
 #### Parameters
 ><p>**id** *(integer)*<br />
 Product ID of the requested product</p>
-<p>**limit:** *(integer; default: 100)*<br />
-Number of results to return; acceptable range: 1-100</p>
-<p>**offset:** *(integer; default: 0)*<br />
-Number of results to skip before beginning the return; must not be negative</p>
 
 #### Response
 ```
@@ -114,7 +111,37 @@ Number of results to skip before beginning the return; must not be negative</p>
   ]
 }
 ```
-**NOTE:** The products_price parameter will return a string due to an issue with PHP's serialization. The value will need to be converted to a float if being implemented directly into calculations.
+
+To view all products in a given category:
+>**URI:** http://www.pricebustersgames.com/pbadmin/pos-api/product/category/{id}
+
+#### Parameters
+><p>**id** *(integer)*<br />
+Category ID of the requested category</p>
+<p>**limit:** *(integer; default: 100)*<br />
+Number of results to return; acceptable range: 1-100</p>
+<p>**offset:** *(integer; default: 0)*<br />
+Number of results to skip before beginning the return; must not be negative</p>
+
+#### Response
+```
+{
+  "status": "ok" || "err",
+  "errors": [],
+  "results": [
+    {
+      "products_id": 0,
+      "products_name": "string",
+      "products_quantity": 0,
+      "products_model": "string",
+      "products_price": "0.00",
+      "categories_id": 0
+    }, (...)
+  ]
+}
+```
+
+**NOTE:** On all product calls, the products_price parameter will return a string due to an issue with PHP's serialization. The value will need to be converted to a float if being implemented directly into calculations.
 
 ## Labels (GET)
 >**URI:** http://www.pricebustersgames.com/pbadmin/pos-api/label/{id}

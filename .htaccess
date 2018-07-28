@@ -10,6 +10,7 @@ RewriteRule ^category/parent/([0-9]+)$ category.php?parentId=$1 [NC,QSA,L]
 RewriteRule ^category/?$ category.php [NC,L]
 
 RewriteRule ^product/([0-9]+)$ product.php?id=$1 [NC,QSA,L]
+RewriteRule ^product/category/([0-9]+)$ products.php?catId=$1 [NC,QSA,L]
 RewriteRule ^product/?$ product.php [NC,L]
 
 RewriteRule ^label/([0-9]+)$ label.php?id=$1 [NC,QSA,L]
