@@ -8,7 +8,6 @@
       $db = $this->db;
 
       $headers = $_SERVER;
-      print_r($headers);
       if(!isset($headers['HTTP_AUTHORIZATION'])){
         $return['status'] = 'err';
         $return['errors'][] = 'Authorization missing';

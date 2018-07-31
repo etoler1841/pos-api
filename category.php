@@ -1,6 +1,5 @@
 <?php
   require 'includes/includes.php';
-  print_r($_GET);
 
   $user = new User($db);
   $return = $user->authorize();
@@ -22,6 +21,7 @@
         'before' => (isset($data['before'])) ? date('Y-m-d H:i:s', $data['before']) : date('Y-m-d H:i:s', strtotime('now')),
         'after' => (isset($data['after'])) ? date('Y-m-d H:i:s', $data['after']) : date('Y-m-d H:i:s', 0),
       );
+      print_r($params);
       $results = $cat->getAllCategories($params);
     } elseif(isset($data['parentId'])){
       $parent = $data['parentId'];
