@@ -19,9 +19,9 @@ Number of results to return; acceptable range: 1-100</p>
 <p>**offset:** *(integer; default: 0)*<br />
 Number of results to skip before beginning the return; must not be negative</p>
 <p>**before:** *(timestamp; default: now)*<br />
-Pulls only categories created before the given time.</p>
+Returns only categories created before the given time.</p>
 <p>**after:** *(timestamp; default: 0)*<br />
-Pulls only categories created after the given time.</p>
+Returns only categories created after the given time.</p>
 
 #### Response
 ```
@@ -80,9 +80,9 @@ Number of results to return; acceptable range: 1-100</p>
 <p>**offset:** *(integer; default: 0)*<br />
 Number of results to skip before beginning the return; must not be negative</p>
 <p>**before:** *(timestamp; default: now)*<br />
-Pulls only categories created before the given time.</p>
+Returns only categories created before the given time.</p>
 <p>**after:** *(timestamp; default: 0)*<br />
-Pulls only categories created after the given time.</p>
+Returns only categories created after the given time.</p>
 
 #### Response
 ```
@@ -104,8 +104,16 @@ To view details of a specific product:
 >**URL:** http://www.pricebustersgames.com/pbadmin/pos-api/product/{id}
 
 #### Parameters
-><p>**id** *(integer)*<br />
-Product ID of the requested product</p>
+><p>**id** *(integer; optional)*<br />
+Category ID of the parent category</p>
+<p>**limit:** *(integer; default: 100)*<br />
+Number of results to return; acceptable range: 1-100</p>
+<p>**offset:** *(integer; default: 0)*<br />
+Number of results to skip before beginning the return; must not be negative</p>
+<p>**before:** *(timestamp; default: now)*<br />
+Returns only categories created before the given time.</p>
+<p>**after:** *(timestamp; default: 0)*<br />
+Returns only categories created after the given time.</p>
 
 #### Response
 ```
@@ -136,9 +144,9 @@ Number of results to return; acceptable range: 1-100</p>
 <p>**offset:** *(integer; default: 0)*<br />
 Number of results to skip before beginning the return; must not be negative</p>
 <p>**before:** *(timestamp; default: now)*<br />
-Pulls only products created before the given time.</p>
+Returns only products created before the given time.</p>
 <p>**after:** *(timestamp; default: 0)*<br />
-Pulls only products created after the given time.</p>
+Returns only products created after the given time.</p>
 
 #### Response
 ```
