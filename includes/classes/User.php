@@ -1,6 +1,5 @@
 <?php
-  class User {
-    function __construct($db){
+  class User {function __construct($db){
       $this->db = $db;
     }
 
@@ -21,12 +20,13 @@
       }
       $token = preg_replace('/bearer /i', '', $auth);
 
-      $sql = "SELECT 1
+      $sql = "SELECT id
               FROM pos_auth
               WHERE token = ?";
       $stmt = $db->prepare($sql);
       $stmt->bind_param("s", $token);
       $stmt->execute();
+      $stmt->bind_result($id);
       $stmt->store_result();
       if(!$stmt->num_rows){
         $return['status'] = 'err';
@@ -35,6 +35,10 @@
       } else {
         $return['status'] = 'ok';
         $return['errors'] = array();
+
+        $stmt->fetch();
+        $this->storeId = $id;
+
         return $return;
       }
     }

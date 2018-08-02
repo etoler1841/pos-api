@@ -1,7 +1,7 @@
 # POS API Reference
 ## Introduction
 This API is used to facilitate communication between the [Price Busters Games website](http://www.pricebustersgames.com) and the **PHP Desktop POS** application.
-All parameters not defined in the URL listing should be appended to the URL as a query string.
+All parameters not defined in the URL listing should be sent via the specified method (POST or GET).
 ## Connecting to the API
 All API calls must include the following HTTP header:
 >Authorization: bearer {token}
@@ -19,9 +19,9 @@ Number of results to return; acceptable range: 1-100</p>
 <p>**offset:** *(integer; default: 0)*<br />
 Number of results to skip before beginning the return; must not be negative</p>
 <p>**before:** *(timestamp; default: now)*<br />
-Returns only categories created before the given time.</p>
+Pulls only categories created before the given time.</p>
 <p>**after:** *(timestamp; default: 0)*<br />
-Returns only categories created after the given time.</p>
+Pulls only categories created after the given time.</p>
 
 #### Response
 ```
@@ -80,9 +80,9 @@ Number of results to return; acceptable range: 1-100</p>
 <p>**offset:** *(integer; default: 0)*<br />
 Number of results to skip before beginning the return; must not be negative</p>
 <p>**before:** *(timestamp; default: now)*<br />
-Returns only categories created before the given time.</p>
+Pulls only categories created before the given time.</p>
 <p>**after:** *(timestamp; default: 0)*<br />
-Returns only categories created after the given time.</p>
+Pulls only categories created after the given time.</p>
 
 #### Response
 ```
@@ -104,16 +104,8 @@ To view details of a specific product:
 >**URL:** http://www.pricebustersgames.com/pbadmin/pos-api/product/{id}
 
 #### Parameters
-><p>**id** *(integer; optional)*<br />
-Category ID of the parent category</p>
-<p>**limit:** *(integer; default: 100)*<br />
-Number of results to return; acceptable range: 1-100</p>
-<p>**offset:** *(integer; default: 0)*<br />
-Number of results to skip before beginning the return; must not be negative</p>
-<p>**before:** *(timestamp; default: now)*<br />
-Returns only categories created before the given time.</p>
-<p>**after:** *(timestamp; default: 0)*<br />
-Returns only categories created after the given time.</p>
+><p>**id** *(integer)*<br />
+Product ID of the requested product</p>
 
 #### Response
 ```
@@ -144,9 +136,9 @@ Number of results to return; acceptable range: 1-100</p>
 <p>**offset:** *(integer; default: 0)*<br />
 Number of results to skip before beginning the return; must not be negative</p>
 <p>**before:** *(timestamp; default: now)*<br />
-Returns only products created before the given time.</p>
+Pulls only products created before the given time.</p>
 <p>**after:** *(timestamp; default: 0)*<br />
-Returns only products created after the given time.</p>
+Pulls only products created after the given time.</p>
 
 #### Response
 ```
@@ -189,5 +181,22 @@ Category ID of the requested product</p>
       "game_sleeve": 0
     }
   ]
+}
+```
+
+## Inventory (POST)
+>**URL:** http://www.pricebustersgames.com/pbadmin/pos-api/inventory/{id}
+
+#### Parameters
+><p>**id** *(integer)*<br />
+Product ID of the requested product</p>
+<p>**qty** *(integer)*<br />
+Quantity to add (positive) or remove (negative) from the store's inventory</p>
+
+#### Response
+```
+{
+  "status": "ok" || "err",
+  "errors": []
 }
 ```

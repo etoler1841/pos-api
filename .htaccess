@@ -6,7 +6,7 @@ RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
 
 RewriteRule ^product/([0-9]+)$ product.php?id=$1 [NC,QSA,L]
 RewriteRule ^product/category/([0-9]+)$ product.php?catId=$1 [NC,QSA,L]
-RewriteRule ^product/?$ product.php?getAll [NC,QSA,L]
+RewriteRule ^product/?$ product.php [NC,L]
 
 RewriteRule ^category/([0-9]+)$ category.php?id=$1 [NC,QSA,L]
 RewriteRule ^category/tree/([0-9]+)$ category.php?id=$1&tree=1 [NC,QSA,L]
@@ -15,3 +15,6 @@ RewriteRule ^category/?$ category.php?getAll [NC,QSA,L]
 
 RewriteRule ^label/([0-9]+)$ label.php?id=$1 [NC,QSA,L]
 RewriteRule ^label/?$ label.php [NC,L]
+
+RewriteRule ^inventory/([0-9]+)$ inventory.php?id=$1 [NC,L]
+RewriteRule ^inventory/?$ inventory.php [NC,L]
