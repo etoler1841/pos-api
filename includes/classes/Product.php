@@ -7,7 +7,7 @@
     function getProduct($id){
       $db = $this->db;
 
-      $sql = "SELECT pd.products_name, p.products_quantity, p.products_model, p.products_price, p.master_categories_id
+      $sql = "SELECT pd.products_name, p.products_quantity, p.products_model, p.products_price, p.master_categories_id, p.live_price
               FROM products p
               LEFT JOIN products_description pd ON p.products_id = pd.products_id
               WHERE p.products_id = $id";
@@ -22,7 +22,8 @@
           'products_quantity' => (int)$products_quantity,
           'products_model' => $products_model,
           'products_price' => $products_price,
-          'categories_id' => (int)$master_categories_id
+          'categories_id' => (int)$master_categories_id,
+          'live_price' => (boolean)$live_price
         );
       }
 
@@ -32,7 +33,7 @@
     function getCategoryProducts($catId, $params){
       $db = $this->db;
 
-      $sql = "SELECT p.products_id, pd.products_name, p.products_quantity, p.products_model, p.products_price, p.master_categories_id
+      $sql = "SELECT p.products_id, pd.products_name, p.products_quantity, p.products_model, p.products_price, p.master_categories_id, p.live_price
               FROM products p
               LEFT JOIN products_description pd ON p.products_id = pd.products_id
               WHERE p.master_categories_id = $catId
@@ -51,7 +52,8 @@
             'products_quantity' => (int)$products_quantity,
             'products_model' => $products_model,
             'products_price' => $products_price,
-            'categories_id' => (int)$master_categories_id
+            'categories_id' => (int)$master_categories_id,
+            'live_price' => (boolean)$live_price
           );
         }
       }

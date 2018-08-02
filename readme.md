@@ -119,7 +119,8 @@ Product ID of the requested product</p>
       "products_quantity": 0,
       "products_model": "string",
       "products_price": "0.00",
-      "categories_id": 0
+      "categories_id": 0,
+      "live_price": false
     }
   ]
 }
@@ -152,7 +153,8 @@ Pulls only products created after the given time.</p>
       "products_quantity": 0,
       "products_model": "string",
       "products_price": "0.00",
-      "categories_id": 0
+      "categories_id": 0,
+      "live_price": false
     }, (...)
   ]
 }
