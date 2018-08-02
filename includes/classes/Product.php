@@ -95,6 +95,9 @@
                   SET product_stock = product_stock + $qty
                   WHERE product_id = $id";
         } else {
+          if($qty <= 0){
+            return $return;
+          }
           $sql = "SELECT products_price
                   FROM products
                   WHERE products_id = $id";
