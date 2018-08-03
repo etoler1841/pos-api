@@ -202,3 +202,43 @@ Quantity to add (positive) or remove (negative) from the store's inventory</p>
   "errors": []
 }
 ```
+
+## Get Price Updates (GET)
+>**URL** http://www.pricebustersgames.com/pbadmin/pos-api/price-change
+
+This endpoint pulls all items which have different prices listed in the master products table from those listed in the individual store's inventory table.
+
+#### Response
+```
+{
+  "status": "ok" || "err",
+  "errors": [],
+  "results": [
+    {
+      "products_id": 0,
+      "new_price": "0.00"
+    }
+  ]
+}
+```
+
+**NOTE:** The products_price parameter will return a string due to an issue with PHP's serialization. The value will need to be converted to a float if being implemented directly into calculations.
+
+## Update Price (POST)
+>**URL** http://www.pricebustersgames.com/pbadmin/pos-api/price-change/{id}
+
+This endpoint updates the individual store's online inventory to reflect price updates performed to match the master products table.
+
+#### Parameters
+><p>**id** *(integer)*<br />
+Product Id of the product to update</p>
+<p>**price** *(float)*<br />
+New price of the selected product</p>
+
+#### Response
+```
+{
+  "status": "ok" || "err",
+  "errors": []
+}
+```

@@ -18,3 +18,6 @@ RewriteRule ^label/?$ label.php [NC,L]
 
 RewriteRule ^inventory/([0-9]+)$ inventory.php?id=$1 [NC,L]
 RewriteRule ^inventory/?$ inventory.php [NC,L]
+
+RewriteRule ^price-change/([0-9]+)$ price_change.php?id=$1 [NC,L]
+RewriteRule ^price-change/?$ price_change.php [NC,L]

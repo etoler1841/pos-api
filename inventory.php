@@ -8,7 +8,7 @@
     if(isset($_GET['id']) && isset($_POST['qty'])){
       $id = $_GET['id'];
       $qty = $_POST['qty'];
-      $prod->updateQty($id, $qty, $user->storeId);
+      $return = $prod->updateQty($id, $qty, $user->storeId);
     } else {
       $return['status'] = 'err';
       $return['errors'][] = 'Missing parameter.';

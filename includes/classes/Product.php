@@ -178,4 +178,59 @@
       }
       return $return;
     }
+
+    function getPriceUpdates($storeId){
+      $db = $this->db;
+
+      $sql = "SELECT p.products_id, p.products_price
+              FROM products p
+              LEFT JOIN pos_inventory_".$storeId." i
+              ON p.products_id = i.product_id
+              LEFT JOIN categories_description cd
+              ON p.master_categories_id = cd.categories_id
+              WHERE p.products_price != i.product_price
+              AND p.live_price = 0
+              ORDER BY cd.categories_name ASC,
+                       p.products_full_name ASC";
+      $result = $db->query($sql);
+      while($row = $result->fetch_array(MYSQLI_ASSOC)){
+        extract($row);
+        $return['results'][] = array(
+          'products_id' => (int)$products_id,
+          'products_price' => number_format($products_price, 2)
+        );
+      }
+      return $return;
+    }
+
+    function updatePrice($id, $price, $storeId){
+      $db = $this->db;
+
+      if($db->error){
+        $return = array(
+          'status' => 'err',
+          'errors' => array(
+            $db->error
+          )
+        );
+        return $return;
+      } else {
+        $return = array(
+          'status' => 'ok',
+          'errors' => array()
+        );
+      }
+
+      $sql = "UPDATE pos_inventory_".$storeId."
+              SET product_price = ?
+              WHERE product_id = $id";
+      $stmt = $db->prepare($sql);
+      $stmt->bind_param("d", $price);
+      $stmt->execute();
+      if($stmt->error){
+        $return['status'] = 'err';
+        $return['errors'][] = $stmt->error;
+      }
+      return $return;
+    }
   }
