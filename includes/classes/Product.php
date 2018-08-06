@@ -188,16 +188,17 @@
               ON p.products_id = i.product_id
               LEFT JOIN categories_description cd
               ON p.master_categories_id = cd.categories_id
-              WHERE p.products_price != i.product_price
+              WHERE FORMAT(p.products_price, 2) != FORMAT(i.product_price, 2)
               AND p.live_price = 0
               ORDER BY cd.categories_name ASC,
                        p.products_full_name ASC";
       $result = $db->query($sql);
+      $return = array();
       while($row = $result->fetch_array(MYSQLI_ASSOC)){
         extract($row);
-        $return['results'][] = array(
+        $return[] = array(
           'products_id' => (int)$products_id,
-          'products_price' => number_format($products_price, 2)
+          'new_price' => number_format($products_price, 2)
         );
       }
       return $return;

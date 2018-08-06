@@ -10,7 +10,7 @@
       $price = $_POST['price'];
       $return = $prod->updatePrice($id, $price, $user->storeId);
     } else {
-      $return = $prod->getPriceUpdates($user->storeId);
+      $return['results'] = $prod->getPriceUpdates($user->storeId);
     }
   }
 
