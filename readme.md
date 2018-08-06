@@ -242,3 +242,22 @@ New price of the selected product</p>
   "errors": []
 }
 ```
+
+## Download Stock Changes (GET)
+>**URL** http://www.pricebustersgames.com/pbadmin/pos-api/product/queue/
+
+This endpoint returns an array of all changes to product quantities on the website not yet received by the POS. (N.B.: Signs are **not** inverted, as the table records both additions AND subtractions to/from products. In other words, when a product sells on the website, it will be entered in the table as a negative value.)
+
+#### Response
+```
+{
+  "status": "ok" || "err",
+  "errors": [],
+  "results": [
+    {
+      "products_id": 0,
+      "products_quantity": 0
+    }, (...)
+  ]
+}
+```

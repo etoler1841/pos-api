@@ -234,4 +234,24 @@
       }
       return $return;
     }
+
+    function dlQueue($storeId){
+      $db = $this->db;
+
+      $sql = "DELETE FROM pos_queue_".$storeId." WHERE queue_id = ?";
+      $stmt = $db->prepare($sql);
+
+      $sql = "SELECT * FROM pos_queue_".$storeId." ORDER BY queue_id ASC";
+      $result = $db->query($sql);
+      while($row = $result->fetch_array(MYSQLI_ASSOC)){
+        extract($row);
+        $return[] = array(
+          "products_id" => (int)$products_id,
+          "products_quantity" => (int)$products_quantity
+        );
+        $stmt->bind_param("i", $queue_id);
+        $stmt->execute();
+      }
+      return $return;
+    }
   }
